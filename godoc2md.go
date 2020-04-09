@@ -160,4 +160,5 @@ func Godoc2md(args []string, out io.Writer, config *Config) (err error) {
 	if err != nil {
 		return
 	}
+	return
 }
