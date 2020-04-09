@@ -131,7 +131,7 @@ func bitscapeFunc(text string) string {
 }
 
 //Godoc2md turns your godoc into markdown
-func Godoc2md(args []string, out io.Writer, config *Config) {
+func Godoc2md(args []string, out io.Writer, config *Config) (err error) {
 	// use file system of underlying OS
 	fs.Bind("/", vfs.OS(config.Goroot), "/", vfs.BindReplace)
 	// Bind $GOPATH trees into Go root.
@@ -156,7 +156,8 @@ func Godoc2md(args []string, out io.Writer, config *Config) {
 	} else {
 		tmpl = readTemplate("package.txt", pkgTemplate)
 	}
-	if err := commandLine(out, fs, pres, tmpl, args); err != nil {
-		log.Print(err)
+	err = commandLine(out, fs, pres, tmpl, args)
+	if err != nil {
+		return
 	}
 }
