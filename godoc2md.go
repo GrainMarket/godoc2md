@@ -157,8 +157,5 @@ func Godoc2md(args []string, out io.Writer, config *Config) (err error) {
 		tmpl = readTemplate("package.txt", pkgTemplate)
 	}
 	err = commandLine(out, fs, pres, tmpl, args)
-	if err != nil {
-		return
-	}
 	return
 }
